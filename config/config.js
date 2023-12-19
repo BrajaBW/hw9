@@ -4,7 +4,8 @@ const config ={
     password :'root',
     database :'film',
     host :'localhost',
-    dialect :'postgres'
+    dialect :'postgres',
+    logging : false // menonaktivkan log sql 
   }
 }
 
