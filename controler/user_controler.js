@@ -1,7 +1,7 @@
 const {user} = require ('../models')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const { create } = require('./movie_controler')
+
 
 
 class UserController{
@@ -16,18 +16,22 @@ class UserController{
 
     static async register(req,res,next){   
             const {id,email,gender,password,role} = req.body;
+            const {file}=req
             const photo = req.file.path;  
             const hashedPassword = await bcrypt.hash(password, 10);
+            const imegeUrl = `http://localhost:3000/${file.path}`            
+            // const data = await user.create({photo : imegeUrl})            
             const newUser = await user.create({
+            
                 id,
                 email,
                 gender,                
                 password : hashedPassword,
                 role,
-                photo
+                photo :imegeUrl
 
             });
-
+          
             res.status(201).json({
                 message: 'user Berhasil di tambahkan ',data : newUser
             })

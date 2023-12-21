@@ -1,14 +1,15 @@
 const express = require('express')
 const router = express.Router()
 const UserController = require('../controler/user_controler')
+const path = require('path')
 
 const multer = require('multer');
 const storage = multer.diskStorage({
     destination : function (req, file, cb){
-        cb(null, ('./assets/'))
+        cb(null,('assets'))
     },
     filename: function (req, file, cb ){
-        cb(null, file.originalname);
+        cb(null,Date.now()+path.extname(file.originalname))
     }
 });
 const upload = multer({storage : storage});
